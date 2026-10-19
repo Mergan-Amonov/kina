@@ -9,7 +9,7 @@ binding = "ASSETS"
 [[d1_databases]]
 binding = "DB"
 database_name = "anki-db"
-database_id = "BU_YERGA_D1_ID_NI_QOYING"   # `npx wrangler d1 create anki-db` chiqargan id
+database_id = "5ed16095-9f25-45fa-88b9-cac3dc54895d"
 
 [triggers]
 crons = ["*/15 * * * *"]
