@@ -246,14 +246,15 @@ export function deleteDeck(id) {
 
 export function deckCounts(deckId) {
   const t = now();
-  let total = 0, fresh = 0, learning = 0, due = 0;
+  let total = 0, fresh = 0, learning = 0, due = 0, learned = 0;
   for (const c of db.cards) {
     if (deckId && c.d !== deckId) continue;
     total++;
+    if (c.s === 'review') learned++;
     if (c.s === 'new') fresh++;
     else if (c.due <= t) c.s === 'learning' ? learning++ : due++;
   }
-  return { total, new: fresh, learning, due };
+  return { total, new: fresh, learning, due, learned };
 }
 
 // ---------- kartalar ----------

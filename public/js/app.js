@@ -12,6 +12,31 @@ const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', 
 const haptic = (type = 'light') => { try { tg?.HapticFeedback?.impactOccurred(type); } catch {} };
 const notify = (type) => { try { tg?.HapticFeedback?.notificationOccurred(type); } catch {} };
 
+const svg = (body, cls = '') => `<svg class="i ${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${body}</svg>`;
+const ICON = {
+  play: svg('<path d="M7 4.5v15l12.5-7.5z" fill="currentColor" stroke="none"/>'),
+  plus: svg('<path d="M12 5v14M5 12h14"/>'),
+  flame: svg('<path d="M12 22c4.4 0 7-2.9 7-6.6 0-3.1-1.9-5.2-3.4-6.9-.3 1.6-1.1 2.8-2.3 3.3.3-3.2-1-6.6-4.3-8.8.1 3-1.4 5-3 6.8C4.6 11.4 5 13 5 15.4 5 19.1 7.6 22 12 22z"/>'),
+  check: svg('<path d="M20 6 9 17l-5-5"/>'),
+  layers: svg('<path d="m12 3 9 5-9 5-9-5 9-5z"/><path d="m3 13 9 5 9-5"/>'),
+  undo: svg('<path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/>'),
+  edit: svg('<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>'),
+  sound: svg('<path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/>'),
+  back: svg('<path d="m15 18-6-6 6-6"/>'),
+  list: svg('<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>'),
+  gear: svg('<path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/>'),
+  trash: svg('<path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/>'),
+  sparkle: svg('<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/>'),
+};
+
+function ring(p, label) {
+  const r = 30, c = 2 * Math.PI * r;
+  return `<div class="ring"><svg viewBox="0 0 72 72" aria-hidden="true">
+      <circle cx="36" cy="36" r="${r}" class="ring-bg"/>
+      <circle cx="36" cy="36" r="${r}" class="ring-fg" stroke-dasharray="${c.toFixed(1)}" stroke-dashoffset="${(c * (1 - p)).toFixed(1)}"/>
+    </svg><div class="ring-num">${label}</div></div>`;
+}
+
 const LANGS = [
   ['en-US', 'Inglizcha'], ['ru-RU', 'Ruscha'], ['de-DE', 'Nemischa'], ['fr-FR', 'Fransuzcha'],
   ['es-ES', 'Ispancha'], ['tr-TR', 'Turkcha'], ['ar-SA', 'Arabcha'], ['ko-KR', 'Koreyscha'],
@@ -125,49 +150,71 @@ function home() {
   const q = S.queueCounts(0);
   const todo = q.learning + q.due + q.new;
   const st = S.stats();
-  const decks = S.db.decks.map((d) => ({ d, c: S.deckCounts(d.id), q: S.queueCounts(d.id) }));
+  const done = st.today.n;
+  const p = todo + done ? done / (todo + done) : 0;
+  const name = tg?.initDataUnsafe?.user?.first_name;
+  // Bo'sh "Asosiy" to'plami boshqa to'plamlar bo'lsa ko'rsatilmaydi
+  const decks = S.db.decks
+    .map((d) => ({ d, c: S.deckCounts(d.id), q: S.queueCounts(d.id) }))
+    .filter(({ d, c }) => !(c.total === 0 && d.name === 'Asosiy' && S.db.decks.length > 1));
 
   view.innerHTML = `
-    ${topbar('So\'z yodlash')}
-    <div class="pills">
-      <div class="pill"><b>🔥 ${st.streak}</b><span>kun ketma-ket</span></div>
-      <div class="pill"><b>${st.today.n}</b><span>bugun ko'rildi</span></div>
-      <div class="pill"><b>${st.total}</b><span>jami so'z</span></div>
+    ${topbar()}
+    <section class="hero">
+      <div class="hero-text">
+        <div class="hello">${name ? `Salom, ${esc(name)}!` : 'Salom!'}</div>
+        <div class="hero-title">${
+          !st.total ? "Birinchi so'zlaringizni qo'shing"
+          : todo ? `Bugun <b>${todo}</b> ta so'z kutmoqda`
+          : 'Bugungi reja bajarildi!'}</div>
+        ${!st.total
+          ? `<button class="hero-btn" data-a="addTab">${ICON.plus}So'z qo'shish</button>`
+          : todo ? `<button class="hero-btn" data-a="review" data-deck="0">${ICON.play}Boshlash</button>`
+          : `<div class="hero-sub">Ertaga yangi so'zlar kutadi 🌙</div>`}
+      </div>
+      ${st.total ? ring(p, `${Math.round(p * 100)}%`) : ''}
+    </section>
+
+    <div class="stats3">
+      <div class="stat"><span class="ic fire">${ICON.flame}</span><b>${st.streak}</b><small>kun ketma-ket</small></div>
+      <div class="stat"><span class="ic ok">${ICON.check}</span><b>${done}</b><small>bugun ko'rildi</small></div>
+      <div class="stat"><span class="ic lay">${ICON.layers}</span><b>${st.total}</b><small>jami so'z</small></div>
     </div>
-    ${st.total ? `
-      <button class="btn primary big" data-a="review" data-deck="0">
-        📖 Takrorlash ${todo ? `<span class="badge">${todo}</span>` : ''}
-      </button>` : `
-      <div class="empty">
-        <div class="big-emoji">🃏</div>
-        <p><b>Hali so'zlar yo'q</b></p>
-        <p class="hint">So'z qo'shing yoki namunaviy to'plam bilan sinab ko'ring.</p>
-        <div class="btn-row">
-          <button class="btn primary" data-a="addTab">➕ So'z qo'shish</button>
-          <button class="btn" data-a="sample">✨ Namuna</button>
-        </div>
-      </div>`}
-    <h2 class="section">To'plamlar</h2>
-    <div class="list">
-      ${decks.map(({ d, c, q }) => `
-        <button class="row" data-a="openDeck" data-id="${d.id}">
-          <div class="row-main">
-            <div class="row-title">${esc(d.name)}</div>
-            <div class="row-sub">${c.total} ta so'z</div>
-          </div>
-          <div class="counts">
-            <span class="c-new" title="yangi">${q.new}</span>
-            <span class="c-learn" title="o'rganilmoqda">${q.learning}</span>
-            <span class="c-due" title="takrorlash">${q.due}</span>
-          </div>
-          <span class="chev">›</span>
-        </button>`).join('')}
+
+    ${!st.total ? `
+      <button class="sample-card" data-a="sample">
+        <span class="ic">${ICON.sparkle}</span>
+        <span><b>Namunaviy to'plam</b><small>12 ta inglizcha so'z bilan sinab ko'ring</small></span>
+      </button>` : ''}
+
+    <div class="section-head">
+      <h2>To'plamlar</h2>
+      <button class="link" data-a="newDeck">${ICON.plus}Yangi</button>
     </div>
-    <p class="hint" style="margin:8px 4px 12px">
-      <span class="c-new">●</span> yangi &nbsp; <span class="c-learn">●</span> o'rganilmoqda &nbsp; <span class="c-due">●</span> takrorlash
-    </p>
-    <button class="btn" data-a="newDeck">＋ Yangi to'plam</button>
+    <div class="decks">${decks.map(deckCard).join('')}</div>
   `;
+}
+
+function deckCard({ d, c, q }) {
+  const todo = q.new + q.learning + q.due;
+  const mastery = c.total ? Math.round((100 * c.learned) / c.total) : 0;
+  return `
+    <div class="deck-card" data-a="openDeck" data-id="${d.id}" role="button" tabindex="0">
+      <div class="deck-top">
+        <div class="deck-info">
+          <div class="deck-name">${esc(d.name)}</div>
+          <div class="deck-meta">${c.total ? `${c.total} so'z · ${mastery}% o'zlashtirildi` : "Bo'sh to'plam"}</div>
+        </div>
+        ${todo ? `<button class="play" data-a="review" data-deck="${d.id}" aria-label="Takrorlash">${ICON.play}</button>` : ''}
+      </div>
+      ${c.total ? `<div class="bar"><i style="width:${mastery}%"></i></div>` : ''}
+      <div class="chips">
+        ${q.due ? `<span class="chip due">${q.due} takrorlash</span>` : ''}
+        ${q.learning ? `<span class="chip learn">${q.learning} o'rganilmoqda</span>` : ''}
+        ${q.new ? `<span class="chip new">${q.new} yangi</span>` : ''}
+        ${!todo && c.total ? `<span class="chip ok">${ICON.check}Bugunga tayyor</span>` : ''}
+      </div>
+    </div>`;
 }
 
 actions.review = (el) => { haptic(); go('review', { deckId: Number(el.dataset.deck) }); };
@@ -211,22 +258,32 @@ function deck({ deckId }) {
   if (!d) return back();
   const c = S.deckCounts(deckId);
   const q = S.queueCounts(deckId);
+  const todo = q.new + q.learning + q.due;
+  const mastery = c.total ? c.learned / c.total : 0;
   view.innerHTML = `
-    ${topbar(d.name)}
-    <div class="pills">
-      <div class="pill"><b class="c-new">${q.new}</b><span>yangi (bugun)</span></div>
-      <div class="pill"><b class="c-learn">${q.learning}</b><span>o'rganilmoqda</span></div>
-      <div class="pill"><b class="c-due">${q.due}</b><span>takrorlash</span></div>
+    ${topbar()}
+    <section class="deck-hero">
+      <div class="deck-hero-text">
+        <h1>${esc(d.name)}</h1>
+        <div class="deck-meta">${c.total} so'z · ${c.learned} tasi o'zlashtirildi</div>
+      </div>
+      ${ring(mastery, `${Math.round(mastery * 100)}%`)}
+    </section>
+    <div class="stats3">
+      <div class="stat"><b class="c-due">${q.due}</b><small>takrorlash</small></div>
+      <div class="stat"><b class="c-learn">${q.learning}</b><small>o'rganilmoqda</small></div>
+      <div class="stat"><b class="c-new">${q.new}</b><small>yangi (bugun)</small></div>
     </div>
-    <button class="btn primary big" data-a="review" data-deck="${deckId}" ${c.total ? '' : 'disabled'}>📖 Takrorlash</button>
+    <button class="btn primary big" data-a="review" data-deck="${deckId}" ${c.total ? '' : 'disabled'}>
+      ${ICON.play}${todo ? `Takrorlash · ${todo}` : 'Takrorlash'}
+    </button>
     <div class="btn-row">
-      <button class="btn" data-a="addTo" data-id="${deckId}">➕ Qo'shish</button>
-      <button class="btn" data-a="cardList" data-id="${deckId}">📋 Ro'yxat (${c.total})</button>
+      <button class="btn" data-a="addTo" data-id="${deckId}">${ICON.plus}Qo'shish</button>
+      <button class="btn" data-a="cardList" data-id="${deckId}">${ICON.list}So'zlar</button>
     </div>
-    <h2 class="section">Boshqarish</h2>
-    <div class="list">
-      <button class="row" data-a="editDeck" data-id="${deckId}"><div class="row-main">✏️ Nomi va talaffuz tili</div><span class="chev">›</span></button>
-      <button class="row" data-a="deleteDeck" data-id="${deckId}"><div class="row-main" style="color:var(--danger)">🗑 To'plamni o'chirish</div></button>
+    <div class="list" style="margin-top:20px">
+      <button class="row" data-a="editDeck" data-id="${deckId}"><span class="row-ic">${ICON.edit}</span><div class="row-main">Nomi va talaffuz tili</div><span class="chev">›</span></button>
+      <button class="row danger" data-a="deleteDeck" data-id="${deckId}"><span class="row-ic">${ICON.trash}</span><div class="row-main">To'plamni o'chirish</div></button>
     </div>
   `;
 }
@@ -360,19 +417,23 @@ function review(r) {
   if (!card) {
     const next = S.nextLearningDue(r.deckId || 0);
     const st = S.stats();
+    const acc = st.today.n ? Math.round((100 * st.today.ok) / st.today.n) : 0;
     view.innerHTML = `
-      ${topbar()}
       <div class="done">
         ${next ? `
-          <div class="big-emoji">⏳</div>
+          <div class="done-emoji">⏳</div>
           <h1>Biroz kuting</h1>
           <p class="hint">O'rganilayotgan so'zlar <b id="wait">${humanDelay(next - S.now())}</b>dan keyin qaytadi.</p>
         ` : `
-          <div class="big-emoji">🎉</div>
-          <h1>Bugungi takrorlash tugadi!</h1>
-          <p class="hint">Bugun ${st.today.n} ta karta ko'rildi · 🔥 ${st.streak} kun ketma-ket</p>
+          <div class="done-emoji">🎉</div>
+          <h1>Ajoyib, bugungi takrorlash tugadi!</h1>
+          <div class="stats3 done-stats">
+            <div class="stat"><b>${st.today.n}</b><small>karta</small></div>
+            <div class="stat"><b>${acc}%</b><small>to'g'ri</small></div>
+            <div class="stat"><span class="ic fire">${ICON.flame}</span><b>${st.streak}</b><small>kun ketma-ket</small></div>
+          </div>
         `}
-        <div style="margin-top:24px"><button class="btn primary" data-a="back">Orqaga</button></div>
+        <button class="btn primary big" data-a="back">Bosh sahifaga</button>
       </div>`;
     if (next) {
       reviewTimer = setInterval(() => {
@@ -386,33 +447,45 @@ function review(r) {
   const deckObj = S.deckById(card.d);
   const q = S.queueCounts(r.deckId || 0);
   const times = S.intervalsPreview(card);
+  const left = q.new + q.learning + q.due;
+  r.done ??= 0;
+  const pct = r.done + left ? (100 * r.done) / (r.done + left) : 0;
+  const badge = { new: ['new', 'Yangi'], learning: ['learn', "O'rganilmoqda"], review: ['due', 'Takrorlash'] }[card.s];
+  const speakBtn = canSpeak && deckObj?.lang ? `<button class="speak" data-a="speak" aria-label="Tinglash">${ICON.sound}</button>` : '';
   view.innerHTML = `
-    <div class="rv-top">
-      ${!inTelegram ? '<button class="icon-btn" data-a="back">‹</button>' : ''}
-      <span class="c-new">${q.new}</span><span class="c-learn">${q.learning}</span><span class="c-due">${q.due}</span>
-      <span class="spacer"></span>
-      <button class="icon-btn" data-a="undo" ${S.canUndo() ? '' : 'disabled'}>↶ Ortga</button>
-      <button class="icon-btn" data-a="editCurrent">✏️</button>
-    </div>
-    <div class="card-wrap" data-a="flip">
-      <div class="card3d" id="card">
-        <div class="face front">
-          <div class="deck-name">${esc(deckObj?.name)}</div>
-          <div class="word">${esc(card.f)}</div>
-          ${canSpeak && deckObj?.lang ? '<button class="speak" data-a="speak">🔊 Tinglash</button>' : ''}
-          <div class="tap-hint">Javobni eslang va kartaga bosing</div>
-        </div>
-        <div class="face back">
-          <div class="deck-name">${esc(deckObj?.name)}</div>
-          <div class="front-small">${esc(card.f)}</div>
-          <hr>
-          <div class="answer">${esc(card.b)}</div>
-          ${canSpeak && deckObj?.lang ? '<button class="speak" data-a="speak">🔊 Tinglash</button>' : ''}
+    <div class="rv">
+      <div class="rv-head">
+        ${!inTelegram ? `<button class="icon-btn" data-a="back" aria-label="Orqaga">${ICON.back}</button>` : ''}
+        <div class="rv-progress"><i style="width:${pct}%"></i></div>
+        <span class="rv-left">${left}</span>
+        <button class="icon-btn" data-a="undo" aria-label="Ortga qaytarish" ${S.canUndo() ? '' : 'disabled'}>${ICON.undo}</button>
+        <button class="icon-btn" data-a="editCurrent" aria-label="Tahrirlash">${ICON.edit}</button>
+      </div>
+      <div class="rv-counts">
+        <span class="chip due ${q.due ? '' : 'zero'}">${q.due} takrorlash</span>
+        <span class="chip learn ${q.learning ? '' : 'zero'}">${q.learning} o'rganilmoqda</span>
+        <span class="chip new ${q.new ? '' : 'zero'}">${q.new} yangi</span>
+      </div>
+      <div class="card-wrap" data-a="flip">
+        <div class="card3d" id="card">
+          <div class="face front">
+            <div class="face-top"><span class="chip ${badge[0]}">${badge[1]}</span><span class="deck-name">${esc(deckObj?.name)}</span></div>
+            <div class="word">${esc(card.f)}</div>
+            ${speakBtn}
+            <div class="tap-hint">Javobni eslang va kartaga bosing</div>
+          </div>
+          <div class="face back">
+            <div class="face-top"><span class="chip ${badge[0]}">${badge[1]}</span><span class="deck-name">${esc(deckObj?.name)}</span></div>
+            <div class="front-small">${esc(card.f)}</div>
+            <hr>
+            <div class="answer">${esc(card.b)}</div>
+            ${speakBtn}
+          </div>
         </div>
       </div>
-    </div>
-    <div id="rv-actions">
-      <button class="btn primary big" data-a="flip">Javobni ko'rsatish</button>
+      <div id="rv-actions">
+        <button class="btn primary big" data-a="flip">Javobni ko'rsatish</button>
+      </div>
     </div>
   `;
   r.times = times;
@@ -435,6 +508,7 @@ function grade(g) {
   const card = S.cardById(r.cardId);
   if (!card) return render();
   S.answer(card, g);
+  r.done = (r.done ?? 0) + 1;
   haptic(g === 1 ? 'heavy' : 'light');
   render();
 }
@@ -450,7 +524,12 @@ actions.speak = (el, e) => {
   if (card) speak(card.f, S.deckById(card.d)?.lang);
 };
 actions.undo = () => {
-  if (S.undo()) { toast('↶ Oxirgi baho bekor qilindi'); render(); }
+  if (S.undo()) {
+    const r = current();
+    if (r.done) r.done--;
+    toast('↶ Oxirgi baho bekor qilindi');
+    render();
+  }
 };
 actions.editCurrent = () => editCard(current().cardId);
 
