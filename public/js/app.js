@@ -282,6 +282,7 @@ function add(r) {
       <pre class="sample">apple - olma
 to run - yugurmoq
 beautiful = chiroyli</pre>
+      <p class="hint" style="margin:0 4px 8px"><code># To'plam nomi</code> qatori — keyingi so'zlar shu nomli to'plamga tushadi (bo'lmasa yaratiladi)</p>
       <textarea class="input" id="bulk" rows="8" placeholder="So'zlarni shu yerga yozing yoki joylang…"></textarea>
       <div class="btn-row">
         <label class="btn file-btn">📄 Fayldan<input type="file" id="file" accept=".txt,.csv,.tsv,text/plain,text/csv"></label>
@@ -323,15 +324,28 @@ actions.addOne = () => {
   $('#front').focus();
 };
 actions.addBulk = () => {
-  const { pairs, bad } = S.parsePairs($('#bulk').value);
-  if (!pairs.length) return toast("Hech narsa topilmadi. Format: so'z - tarjima");
-  const { added, skipped } = S.addCards(current().deckId, pairs);
+  const sections = S.parseSections($('#bulk').value);
+  if (!sections.some((s) => s.pairs.length)) return toast("Hech narsa topilmadi. Format: so'z - tarjima");
+  let added = 0, skipped = 0, bad = 0, newDecks = 0;
+  for (const s of sections) {
+    let deckId = current().deckId;
+    if (s.name) {
+      let deck = S.db.decks.find((d) => d.name.toLowerCase() === s.name.toLowerCase());
+      if (!deck) { deck = S.addDeck(s.name, 'en-US'); newDecks++; }
+      deckId = deck.id;
+    }
+    const r = S.addCards(deckId, s.pairs);
+    added += r.added;
+    skipped += r.skipped;
+    bad += s.bad.length;
+  }
   notify('success');
   let msg = `✅ ${added} ta so'z qo'shildi`;
+  if (newDecks) msg += `, ${newDecks} ta yangi to'plam`;
   if (skipped) msg += `, ${skipped} ta takroriy`;
-  if (bad.length) msg += `, ${bad.length} qator tushunilmadi`;
+  if (bad) msg += `, ${bad} qator tushunilmadi`;
   toast(msg);
-  render();
+  if (newDecks) tab('home'); else render();
 };
 
 // ---------- takrorlash ----------

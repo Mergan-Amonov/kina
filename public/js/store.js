@@ -277,6 +277,19 @@ export function parsePairs(text) {
   return { pairs, bad };
 }
 
+// "# To'plam nomi" qatori bilan bo'lingan ro'yxat: [{ name | null, pairs, bad }]
+export function parseSections(text) {
+  const sections = [{ name: null, lines: [] }];
+  for (const line of text.split(/\r?\n/)) {
+    const m = line.match(/^\s*#\s*(.+?)\s*$/);
+    if (m) sections.push({ name: m[1].slice(0, 60), lines: [] });
+    else sections[sections.length - 1].lines.push(line);
+  }
+  return sections
+    .map((s) => ({ name: s.name, ...parsePairs(s.lines.join('\n')) }))
+    .filter((s) => s.pairs.length || s.bad.length);
+}
+
 export function addCards(deckId, pairs) {
   const existing = new Set(db.cards.filter((c) => c.d === deckId).map((c) => c.f.toLowerCase()));
   let k = Math.max(0, maxChunk());

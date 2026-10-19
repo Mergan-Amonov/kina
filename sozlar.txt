@@ -1,0 +1,202 @@
+# Unit 2 – City Transportation
+air-conditioned - konditsionerli
+carefully - ehtiyotkorlik bilan
+convenient - qulay
+dangerously - xavfli tarzda
+emergency - favqulodda holat
+expensive - qimmat
+fare - yo'l haqi
+ferry - parom
+flight - parvoz, reys
+passenger - yo'lovchi
+reasonable - maqbul, arzon-garov
+rude - qo'pol
+safe - xavfsiz
+subway - metro
+taxi - taksi
+ticket - chipta
+uncomfortable - noqulay
+as soon as you can - imkon qadar tezroq
+Are you free? - Bo'shmisiz?
+be in a hurry - shoshilmoq
+catch a train - poyezdga ulgurmoq
+good / poor condition - yaxshi / yomon holatda
+Hop in! - O'tiring! Chiqing!
+not very often - unchalik tez-tez emas
+seat belts - xavfsizlik kamarlari
+shuttle flight - qatnov reysi (doimiy qisqa reys)
+snack bar - bufet, kichik oshxona
+
+# Unit 3 – Neighbors
+anniversary - yilligi, yubiley
+annoying - asabga tegadigan
+appreciate - qadrlamoq, minnatdor bo'lmoq
+arrogant - takabbur, manman
+borrow (something) - (nimanidir) vaqtincha olib turmoq
+burglar - o'g'ri (uyga bostirib kiruvchi)
+considerate - e'tiborli, boshqalarni o'ylaydigan
+cookout - ochiq havodagi ziyofat (kabob)
+delivered - yetkazib berilgan
+driveway - uy oldidagi mashina yo'lagi
+elderly - keksa, yoshi ulug'
+gossip - g'iybat; g'iybat qilmoq
+hammer - bolg'a
+impolite - odobsiz, beadab
+inconsiderate - boshqalarni o'ylamaydigan
+incredible - aql bovar qilmaydigan, ajoyib
+invite - taklif qilmoq
+mailbox - pochta qutisi
+neighbor - qo'shni
+neighborhood - mahalla, tuman
+normally - odatda
+nosy - boshqalar ishiga burnini suqadigan
+request - iltimos, so'ramoq
+retired - nafaqadagi
+return (something) - (nimanidir) qaytarib bermoq
+shy - uyatchan
+spotless - top-toza
+upset - xafa
+upstairs - yuqori qavatda
+wave - qo'l silkitmoq
+watching out (for) - qarab turish, ehtiyot bo'lish
+be off (work) - ishdan bo'sh bo'lmoq
+break in - bostirib kirmoq
+by any chance - tasodifan
+can't stand (someone) - toqat qila olmaslik
+count on (someone) - (kimgadir) ishonmoq, tayanmoq
+day care - bolalar bog'chasi
+don't mind (doing something) - (biror ishni qilishga) qarshi emasman
+fit in - moslashib ketmoq
+I can manage - O'zim eplayman
+mind one's own business - o'z ishi bilan bo'lmoq
+move in - ko'chib kelmoq
+not think much of (someone) - (kim haqida) unchalik yaxshi fikrda emas
+say "Hello" - salom bermoq
+turn up (the volume) - ovozni balandlatmoq
+work long hours - uzoq soat ishlamoq
+
+# Unit 4 – Celebrations
+anniversary - yilligi, yubiley
+barbecue - barbekyu, ochiq havoda kabob
+bring - olib kelmoq
+buffet - shved stoli, bufet
+candles - shamlar
+chocolate - shokolad
+cute - yoqimtoy, shirin
+delicious - juda mazali
+grill - grilda pishirmoq, gril
+guest - mehmon
+guitar - gitara
+hold - (tadbir) o'tkazmoq
+host - mezbon, mezbonlik qilmoq
+memorize - yod olmoq
+painted - bo'yalgan
+play (musical instrument) - (cholg'u) chalmoq
+serve - (taom) tortmoq
+snack - gazak, yengil tamaddi
+turn (20) - (20) yoshga to'lmoq
+birthday party - tug'ilgan kun ziyofati
+blow out - puflab o'chirmoq
+felt like - ...gisi keldi
+got to know (someone) - (kim bilan) yaqindan tanishdi
+grill some steaks - grilda steyk pishirmoq
+home movie - oilaviy video
+in a while - anchadan beri
+junk food - zararli ovqat, fastfud
+listen to music - musiqa tinglamoq
+make (something) yourself - (nimanidir) o'zing tayyorlamoq
+potluck dinner - har kim bitta taom olib keladigan ziyofat
+show up - kelmoq, paydo bo'lmoq
+surprise party - syurpriz ziyofat
+Why don't you...? - ...sangiz-chi? / Nega ...maysiz?
+You know - Bilasizmi, ...
+
+# Unit 5 – Restaurants
+asparagus - sarsabil
+cheeseburger - chizburger
+chef - bosh oshpaz
+Chinese (food) - xitoy taomlari
+convenient - qulay
+décor - bezak, interyer
+deserved - munosib, loyiq
+downtown - shahar markazida
+empty - bo'sh
+flavor - ta'm
+French (food) - fransuz taomlari
+fries - kartoshka fri
+heat (v.) - isitmoq
+hurry - shoshilmoq
+immigrants - muhojirlar
+Japanese (food) - yapon taomlari
+Korean (food) - koreys taomlari
+lighting - yoritish
+Mexican (food) - meksika taomlari
+milkshake - sutli kokteyl
+part-time - yarim stavkada
+polite - xushmuomala, odobli
+salt - tuz
+server - ofitsiant
+simple - oddiy
+starving - juda och
+Thai (food) - tay taomlari
+tip - choychaqa
+vanilla - vanil
+vegetarian - vegetarian
+baked potato - duxovkada pishirilgan kartoshka
+be sick of (something) - joniga tegmoq, bezor bo'lmoq
+credit card - kredit karta
+eat out - tashqarida ovqatlanmoq
+fast food - fast-fud
+feel like (eating something) - ...gisi kelmoq
+for a change - o'zgarish uchun
+hot sauce - achchiq sous
+junk food - zararli ovqat
+leave a tip - choychaqa qoldirmoq
+make sure - ishonch hosil qilmoq
+stay home - uyda qolmoq
+the only trouble - yagona muammo
+wait on (someone) - xizmat ko'rsatmoq
+What's the occasion? - Nima munosabat bilan?
+your treat - siz mehmon qilasiz
+
+# Unit 7 – Air Travel
+board - (samolyotga) chiqmoq
+bumpy - silkinadigan, notekis
+catch - ulgurmoq
+clear - ochiq, tiniq
+collect - olmoq, yig'moq
+crowded - odam gavjum
+dry - quruq
+economy - ekonom (klass)
+facilities - qulayliklar, sharoit
+fantastic - ajoyib
+fasten - taqmoq, mahkamlamoq
+headphones - quloqchinlar
+horrible - dahshatli, juda yomon
+immigration - pasport nazorati
+route - yo'nalish, marshrut
+smooth - silliq, tekis
+tasteless - ta'msiz
+aisle seat - yo'lak yonidagi o'rindiq
+business class - biznes-klass
+change my seat - o'rindiqni almashtirmoq
+check in - ro'yxatdan o'tmoq
+customs form - bojxona deklaratsiyasi
+Do you mind...? - Qarshi emasmisiz...?
+economy class - ekonom-klass
+far away - uzoqda
+fill out - to'ldirmoq
+flight attendant - styuardessa, styuard
+on time - o'z vaqtida
+overhead compartment - yuk javoni
+put your seat forward - o'rindiq suyanchig'ini tik holatga keltiring
+safety instruction card - xavfsizlik bo'yicha yo'riqnoma
+seat belt - xavfsizlik kamari
+seat number - o'rindiq raqami
+seat pocket - o'rindiq cho'ntagi
+so-so - o'rtacha, unchalik emas
+spring break - bahorgi ta'til
+TV screen - televizor ekrani
+weather report - ob-havo ma'lumoti
+window seat - deraza yonidagi o'rindiq
+working properly - yaxshi ishlamoq, soz bo'lmoq
