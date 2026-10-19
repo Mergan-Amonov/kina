@@ -1,0 +1,165 @@
+# Kundalik fe'llar
+be - bo'lmoq
+have - ega bo'lmoq, bor bo'lmoq
+do - qilmoq
+say - aytmoq
+go - bormoq
+get - olmoq, erishmoq
+make - yasamoq, qilmoq
+know - bilmoq
+think - o'ylamoq
+take - olmoq
+see - ko'rmoq
+come - kelmoq
+want - xohlamoq
+look - qaramoq
+use - foydalanmoq
+find - topmoq
+give - bermoq
+tell - aytib bermoq
+work - ishlamoq
+call - qo'ng'iroq qilmoq, chaqirmoq
+try - harakat qilmoq, urinib ko'rmoq
+ask - so'ramoq
+need - kerak bo'lmoq, muhtoj bo'lmoq
+feel - his qilmoq
+become - bo'lib qolmoq, aylanmoq
+leave - ketmoq, tark etmoq
+put - qo'ymoq
+mean - anglatmoq
+keep - saqlamoq, ushlab turmoq
+let - ruxsat bermoq
+begin - boshlamoq
+seem - tuyulmoq
+help - yordam bermoq
+talk - gaplashmoq
+turn - burilmoq, o'girmoq
+start - boshlamoq
+show - ko'rsatmoq
+hear - eshitmoq
+play - o'ynamoq
+run - yugurmoq
+move - harakatlanmoq, ko'chmoq
+live - yashamoq
+believe - ishonmoq
+hold - ushlab turmoq
+bring - olib kelmoq
+happen - sodir bo'lmoq
+write - yozmoq
+sit - o'tirmoq
+stand - turmoq
+lose - yo'qotmoq
+pay - to'lamoq
+meet - uchrashmoq
+learn - o'rganmoq
+change - o'zgartirmoq
+understand - tushunmoq
+watch - tomosha qilmoq
+follow - ergashmoq, kuzatib bormoq
+stop - to'xtamoq
+speak - gapirmoq
+read - o'qimoq
+spend - sarflamoq
+grow - o'smoq
+open - ochmoq
+walk - piyoda yurmoq
+win - yutmoq, g'alaba qozonmoq
+remember - eslamoq
+buy - sotib olmoq
+wait - kutmoq
+send - yubormoq
+decide - qaror qilmoq
+
+# Asosiy sifatlar
+good - yaxshi
+new - yangi
+old - eski; qari
+great - ajoyib, buyuk
+big - katta
+small - kichik
+long - uzun
+short - qisqa; past bo'yli
+high - baland
+low - past
+young - yosh
+early - erta
+late - kech
+important - muhim
+different - boshqacha, turli
+easy - oson
+difficult - qiyin
+hard - qattiq; qiyin
+free - bepul; bo'sh
+full - to'la
+strong - kuchli
+weak - kuchsiz, zaif
+true - to'g'ri, haqiqiy
+happy - baxtli, xursand
+sad - xafa, g'amgin
+angry - jahli chiqqan
+tired - charchagan
+busy - band
+ready - tayyor
+hungry - och (qorni och)
+cheap - arzon
+expensive - qimmat
+clean - toza
+dirty - iflos
+quiet - jim, sokin
+noisy - shovqinli
+beautiful - chiroyli
+ugly - xunuk
+rich - boy
+poor - kambag'al
+hot - issiq
+cold - sovuq
+fast - tez
+slow - sekin
+heavy - og'ir
+light - yengil
+dangerous - xavfli
+famous - mashhur
+friendly - do'stona, samimiy
+favorite - sevimli
+
+# Kundalik iboralar
+How are you? - Qalaysiz?
+Nice to meet you - Tanishganimdan xursandman
+Thank you very much - Katta rahmat
+You're welcome - Arzimaydi
+Excuse me - Kechirasiz (murojaat qilganda)
+I'm sorry - Uzr, kechirasiz
+Never mind - Hechqisi yo'q
+Of course - Albatta
+I don't know - Bilmayman
+I don't understand - Tushunmayapman
+Could you repeat that? - Qaytarib ayta olasizmi?
+What does it mean? - Bu nimani anglatadi?
+How much is it? - Bu qancha turadi?
+What time is it? - Soat necha?
+Where is the bathroom? - Hojatxona qayerda?
+See you later - Keyinroq ko'rishamiz
+Good luck! - Omad!
+Take care - O'zingizni ehtiyot qiling
+Have a nice day - Kuningiz yaxshi o'tsin
+What's up? - Nima gaplar?
+Not bad - Yomon emas
+Me too - Men ham
+I agree - Qo'shilaman
+That's right - To'g'ri
+No problem - Muammo yo'q
+Let's go! - Ketdik!
+Wait a minute - Bir daqiqa kuting
+Hurry up! - Tezroq bo'l!
+Be careful! - Ehtiyot bo'ling!
+Help! - Yordam bering!
+I'm hungry - Qornim och
+I'm tired - Charchadim
+It doesn't matter - Farqi yo'q
+What's your name? - Ismingiz nima?
+Where are you from? - Qayerdansiz?
+I'm from Uzbekistan - Men O'zbekistondanman
+Can you help me? - Menga yordam bera olasizmi?
+I'd like... - Men ...ni xohlardim
+Happy birthday! - Tug'ilgan kuningiz bilan!
+Congratulations! - Tabriklayman!

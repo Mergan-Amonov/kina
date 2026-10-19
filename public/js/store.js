@@ -7,6 +7,7 @@
 //   c0, c1, …  — kartalar bo'laklari; har bir karta o'z bo'lagiga biriktirilgan (card.k),
 //                shuning uchun baholashda faqat bitta bo'lak qayta yoziladi.
 import { schedule } from './srs.js';
+import { LIBRARY } from './library.js';
 
 const CHUNK_LIMIT = 3900;   // bo'lakning eng katta hajmi (belgi)
 const CHUNK_FILL = 3300;    // yangi kartalar shu hajmgacha qo'shiladi (keyingi o'zgarishlarga zaxira)
@@ -113,7 +114,28 @@ export async function load() {
   if (!db.decks.length) {
     db.decks.push({ id: db.nextId++, name: 'Asosiy', lang: 'en-US' });
     dirty.meta = true;
-    save();
+  }
+  seedLibrary();
+  if (dirty.meta) save();
+}
+
+// Standart to'plamlar har bir foydalanuvchiga bir marta qo'shiladi.
+// O'chirilgan to'plam qaytib kelmaydi; bir xil nomli to'plam bo'lsa, unga faqat yetishmagan so'zlar qo'shiladi.
+function seedLibrary() {
+  const seeded = new Set(db.settings.seeded ?? []);
+  for (const lib of LIBRARY) {
+    if (seeded.has(lib.id)) continue;
+    let deck = db.decks.find((d) => d.name.toLowerCase() === lib.name.toLowerCase());
+    if (!deck) {
+      deck = { id: db.nextId++, name: lib.name, lang: 'en-US' };
+      db.decks.push(deck);
+    }
+    addCards(deck.id, lib.words);
+    seeded.add(lib.id);
+  }
+  if (seeded.size !== (db.settings.seeded ?? []).length) {
+    db.settings.seeded = [...seeded];
+    dirty.meta = true;
   }
 }
 

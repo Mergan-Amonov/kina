@@ -51,3 +51,13 @@ Telegram tashqarisida ochilganda ma'lumotlar brauzerning o'zida saqlanadi va esl
 
 ## Bepul tarif cheklovlari
 Workers: kuniga 100 ming so'rov. D1: kuniga 100 ming yozuv. Bu bir necha ming foydalanuvchiga bemalol yetadi.
+
+## Standart so'zlar
+Har bir yangi foydalanuvchiga `sozlar.txt` va `sozlar_qoshimcha.txt` dagi to'plamlar avtomatik qo'shiladi
+(har biri bir marta; o'chirilgan to'plam qaytib kelmaydi). So'zlarni o'zgartirish uchun:
+```bash
+# .txt fayllarni tahrirlang (# To'plam nomi, keyin "so'z - tarjima" qatorlari)
+npm run library   # public/js/library.js ni qayta yasaydi
+npm run deploy
+```
+Yangi `# To'plam` qo'shsangiz, u mavjud foydalanuvchilarga ham keyingi ochilishda qo'shiladi.
