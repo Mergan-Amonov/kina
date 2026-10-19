@@ -1,0 +1,19 @@
+name = "anki-bot"
+main = "src/worker.js"
+compatibility_date = "2025-06-01"
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "anki-db"
+database_id = "BU_YERGA_D1_ID_NI_QOYING"   # `npx wrangler d1 create anki-db` chiqargan id
+
+[triggers]
+crons = ["*/15 * * * *"]
+
+# Maxfiy qiymatlar (wrangler.toml ga yozilmaydi):
+#   npx wrangler secret put BOT_TOKEN
+#   npx wrangler secret put WEBHOOK_SECRET

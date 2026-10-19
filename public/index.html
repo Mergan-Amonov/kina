@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="uz">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+  <title>So'z yodlash</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🃏</text></svg>">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <div id="view"><div class="loading"><div class="spinner"></div>Yuklanmoqda…</div></div>
+  </div>
+  <nav id="tabs" hidden>
+    <button data-tab="home"><span>🏠</span>Asosiy</button>
+    <button data-tab="add"><span>➕</span>Qo'shish</button>
+    <button data-tab="stats"><span>📊</span>Statistika</button>
+    <button data-tab="settings"><span>⚙️</span>Sozlamalar</button>
+  </nav>
+  <div id="modal-root"></div>
+  <div id="toast"></div>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
